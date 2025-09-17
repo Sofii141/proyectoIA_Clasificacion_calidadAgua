@@ -60,5 +60,5 @@ Un análisis preliminar revela varios desafíos técnicos que guiarán nuestro p
 
 1.  **Volumen Masivo de Datos:** Con casi 6 millones de filas, la eficiencia del código y el manejo de la memoria son cruciales.
 2.  **Gran Cantidad de Valores Faltantes:** El informe de inspiración señala que aproximadamente 2 millones de filas contienen al menos un valor faltante. Se requerirá una estrategia de imputación o eliminación robusta.
-3.  **Baja Correlación Lineal:** Como se observa en el análisis del proyecto de referencia, las correlaciones directas entre las características y la variable objetivo son bajas. Esto sugiere que las relaciones son no lineales y complejas, justificando el uso de modelos avanzados como las Redes Neuronales en lugar de modelos lineales simples.
+3.  **Baja Correlación Lineal:** Las correlaciones directas entre las características y la variable objetivo son bajas. Esto sugiere que las relaciones son no lineales y complejas, justificando el uso de modelos avanzados como las Redes Neuronales en lugar de modelos lineales simples.
 4.  **Dimensionalidad y Ruido:** La alta cantidad de características puede introducir ruido y aumentar la complejidad computacional, haciendo necesaria una selección o ingeniería de características cuidadosa.
