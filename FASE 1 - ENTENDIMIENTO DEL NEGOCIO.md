@@ -1,69 +1,65 @@
-### **1\. Fase 1: Comprensión del Negocio y los Datos**
+# Proyecto: Predicción de la Calidad del Agua Dulce
 
-En esta fase inicial, establecemos las bases del proyecto. Definimos el problema desde una perspectiva de negocio, traducimos esos objetivos a un formato de machine learning y realizamos un primer análisis para familiarizarnos con los datos disponibles.
+## 1. Fase 1: Comprensión del Negocio y los Datos
 
-#### **1.1. Comprensión del Negocio: El Contexto General y los Objetivos**
+En esta fase inicial, establecemos el contexto, los objetivos y el plan del proyecto. Definimos el problema desde una perspectiva global y de negocio, lo traducimos a un problema de ciencia de datos y realizamos un primer análisis para comprender el material con el que trabajaremos: los datos.
 
-El agua dulce es un recurso natural indispensable y cada vez más escaso, constituyendo apenas el 3% del agua del planeta. La calidad de esta agua impacta directamente en la salud pública, la sostenibilidad de los ecosistemas y la economía global. Actividades como el consumo humano, la agricultura, la generación de energía y la producción industrial dependen críticamente de su pureza.
+### 1.1. Comprensión del Negocio
 
-Sin embargo, este recurso vital está bajo constante amenaza por factores como la contaminación industrial y agrícola, el cambio climático y la sobreexplotación. Monitorear la calidad del agua de forma tradicional implica costosos y lentos análisis de laboratorio. Por lo tanto, existe una necesidad apremiante de desarrollar métodos más rápidos, escalables y eficientes para evaluar la potabilidad del agua.
+#### El Problema Global: La Escasez de Agua Potable
 
-Un modelo predictivo exitoso sería una herramienta de gran valor para diversos actores:
+El agua dulce es uno de los recursos naturales más vitales y escasos de nuestro planeta, representando apenas el 3% del volumen total de agua. Es fundamental para casi todos los aspectos de la vida humana, desde el consumo directo y la higiene hasta la generación de alimentos y electricidad. Sin embargo, este recurso esencial se encuentra bajo una presión cada vez mayor debido a la sequía, la contaminación y el aumento de las temperaturas globales. Garantizar el acceso a un suministro de agua seguro no solo es crucial para la salud pública, sino también para la supervivencia de los ecosistemas que dependen de ella.
 
-* **Agencias Ambientales y de Salud Pública:** Podrían utilizar el modelo para monitorear cuerpos de agua a gran escala, identificar focos de contaminación rápidamente y emitir alertas tempranas a la población.  
-* **Plantas de Tratamiento de Agua:** Les permitiría anticipar la calidad del agua entrante y ajustar sus procesos de purificación de manera más eficiente, optimizando costos y recursos.  
-* **Investigadores y Ecologistas:** Facilitaría el estudio del impacto de la contaminación en los ecosistemas acuáticos y el desarrollo de estrategias de conservación.  
-* **Comunidades Locales:** Aumentaría la seguridad y confianza en el suministro de agua potable.
+#### El Problema Operativo: Monitoreo Lento y Reactivo
 
-El beneficio principal es la capacidad de tomar decisiones informadas y proactivas para la gestión de los recursos hídricos, protegiendo tanto la salud humana como el medio ambiente.
+Tradicionalmente, la evaluación de la calidad del agua se realiza mediante análisis fisicoquímicos en laboratorios. Este proceso, aunque preciso, es costoso, requiere mucho tiempo y es inherentemente reactivo. Una muestra puede tardar días o semanas en ser analizada, tiempo durante el cual una fuente de agua contaminada podría ya haber afectado a una comunidad o a un ecosistema. Existe una necesidad crítica de desarrollar métodos más rápidos, escalables y proactivos para evaluar la potabilidad del agua en tiempo casi real.
 
-#### **1.2. Objetivos del Proyecto de Machine Learning: La Solución Propuesta**
+#### Objetivos del Proyecto y Criterios de Éxito
 
-El objetivo técnico de este proyecto es construir y evaluar un modelo de clasificación supervisada, específicamente una Red Neuronal Artificial (MLP Classifier), capaz de predecir la calidad del agua dulce basándose en sus características fisicoquímicas.
+El objetivo principal de este proyecto es desarrollar un **modelo de Machine Learning de alto rendimiento** capaz de predecir si una muestra de agua dulce es apta para el consumo ("Sostenible") basándose en sus parámetros medibles.
 
-* **Entrada (Features):** Un conjunto de 20+ mediciones de parámetros del agua (ej. pH, niveles de hierro, nitratos, turbidez, etc.).  
-* **Salida (Target):** Una etiqueta categórica (Target) que clasifica la calidad del agua. Aunque el dataset menciona tres posibles clases (0, 1, 2), nuestro análisis exploratorio inicial ha revelado que en la práctica solo existen las clases 0 y 1\. Por lo tanto, abordaremos esto como un **problema de clasificación binaria**.  
-  * **Hipótesis de las Clases:**  
-    * Target \= 0: Agua no apta para el consumo (Calidad Baja/Insegura).  
-    * Target \= 1: Agua apta para el consumo (Calidad Buena/Segura).  
-  *   
-* 
+El éxito del proyecto se definirá por la capacidad del modelo para:
+1.  **Clasificar correctamente** las muestras de agua con una alta precisión general.
+2.  **Minimizar los Falsos Negativos:** Es de vital importancia identificar correctamente el agua "No Sostenible". Clasificar erróneamente una muestra peligrosa como segura tiene consecuencias mucho más graves que el error inverso.
+3.  **Ser Eficiente:** El modelo debe ser capaz de procesar grandes volúmenes de datos y ofrecer predicciones rápidas, superando las limitaciones de los métodos de laboratorio tradicionales.
 
-Para que el proyecto sea considerado un éxito, el modelo final debe cumplir con los siguientes criterios:
+### 1.2. Comprensión de los Datos
 
-* **Criterios Técnicos:**  
-  1. **Precisión (Accuracy):** El modelo debe tener una precisión general alta. Sin embargo, dado el desbalance de clases observado, esta métrica por sí sola no es suficiente.  
-  2. **Recall (Sensibilidad) para la clase "No Apta":** Es crucial identificar correctamente las muestras de agua de mala calidad para evitar riesgos de salud. Por lo tanto, maximizar el **Recall** de la clase 0 será una prioridad.  
-  3. **Puntuación F1 (F1-Score):** Buscaremos un buen equilibrio entre Precisión y Recall, especialmente para la clase minoritaria, lo que se refleja en una alta puntuación F1.  
-  4. **Análisis de la Matriz de Confusión:** La matriz deberá mostrar un bajo número de Falsos Negativos (muestras de mala calidad clasificadas incorrectamente como buenas).  
-*   
-* **Criterios de Negocio:**  
-  1. **Interpretabilidad (Parcial):** Aunque las redes neuronales son complejas, debemos ser capaces de identificar qué características (features) son las más influyentes en la predicción del modelo.  
-  2. **Robustez:** El modelo debe ser robusto frente a los valores atípicos y el ruido presentes en los datos, que ya hemos identificado en la fase de exploración.  
-* 
+El proyecto utiliza un conjunto de datos público de Kaggle, originado en el "Intel OneAPI Online AI Hackathon".
 
-#### **1.3. Comprensión Inicial de los Datos: Un Vistazo General**
+- **Dataset en Kaggle:** [Predict the Quality of Freshwater](https://www.kaggle.com/datasets/naiborhujosua/predict-the-quality-of-freshwater)
+- **Repositorio de Inspiración:** [VinayVaishnav/Water_Quality_Prediction](https://github.com/VinayVaishnav/Water-Quality-Prediction)
 
-El conjunto de datos proporcionado por el "Intel OneAPI Hackathon" contiene casi 6 millones de registros de muestras de agua, cada uno con múltiples mediciones químicas y físicas.
+#### Descripción General del Dataset
 
-**Nota:** La información descriptiva que incluiste (las tablas de distribución de cada variable) es parte de la comprensión de los datos. Sin embargo, en un notebook es mucho más efectivo y limpio generar estos resúmenes mediante código (.describe(), .info(), histogramas) en lugar de pegar texto estático. Tus celdas de código posteriores ya hacen esto de manera excelente.
+El dataset consta de **5,956,842 registros** de muestras de agua, cada uno con 22 características (parámetros fisicoquímicos y contextuales) y una etiqueta objetivo.
 
-A continuación, se presenta una descripción de las variables más relevantes:
+#### La Variable Objetivo (`Target`)
 
-| Categoría | Característica | Descripción y Relevancia para la Calidad del Agua |
-| :---- | :---- | :---- |
-| **Fisicoquímicos** | pH | Mide la acidez o alcalinidad. El agua potable debe tener un pH neutro (6.5-8.5). Valores extremos son perjudiciales. |
-|  | Turbidity | Mide la turbidez o claridad del agua. Una alta turbidez puede indicar la presencia de patógenos y contaminantes. |
-|  | Total Dissolved Solids | Concentración de todas las sustancias orgánicas e inorgánicas disueltas. Niveles altos pueden afectar el sabor y la calidad. |
-|  | Conductivity | Capacidad del agua para conducir electricidad, relacionada con la cantidad de sólidos disueltos. |
-|  | Color | La presencia de color puede deberse a materia orgánica disuelta o contaminantes industriales. |
-| **Metales y Minerales** | Iron, Lead, Zinc, Copper, Manganese | Metales pesados. Incluso en bajas concentraciones, metales como el Plomo (Lead) son altamente tóxicos. |
-|  | Nitrate, Chloride, Sulfate, Fluoride | Iones comunes. Altas concentraciones de Nitratos (Nitrate), por ejemplo, son un indicador de contaminación por fertilizantes. |
-| **Contextuales** | Source, Water Temperature, Month, Day | Información sobre el origen y el momento de la recolección de la muestra. Podrían influir en la composición química. |
+La tarea es un **problema de clasificación binaria desbalanceada**. El objetivo es predecir la columna `Target`, que indica la sostenibilidad del agua.
 
-Basándonos en el conocimiento del dominio, planteamos las siguientes hipótesis que buscaremos validar en el Análisis Exploratorio de Datos (AED):
+| Sostenibilidad del Agua | Etiqueta | No. de Muestras | Porcentaje |
+| :--- | :---: | :---: | :---: |
+| No Sostenible | `Target: 0` | 4,151,590 | **69.69%** |
+| Sostenible | `Target: 1` | 1,805,252 | **30.31%** |
 
-1. **Hipótesis de Contaminantes:** Niveles elevados de metales pesados (Lead, Iron), Nitrate y Turbidity estarán fuertemente asociados con la clase 0 (agua no apta).  
-2. **Hipótesis de Pureza:** El agua Colorless (incolora) y con baja turbidez tendrá una mayor probabilidad de pertenecer a la clase 1 (agua apta).  
-3. **Hipótesis de pH:** Las muestras con valores de pH muy alejados del rango neutro (6.5-8.5) serán más propensas a ser de baja calidad.
+El **desbalance de clases** es un desafío clave: la clase "No Sostenible" es más del doble de frecuente que la clase "Sostenible". Esto debe ser abordado en las fases de preprocesamiento y modelado para evitar que el modelo se vuelva sesgado hacia la clase mayoritaria.
 
+#### Descripción de las Características (`Features`)
+
+Los parámetros medidos en cada muestra de agua se pueden agrupar en las siguientes categorías:
+
+| Categoría | Características Incluidas |
+| :--- | :--- |
+| **Parámetros Fisicoquímicos** | `pH`, `Turbidity`, `Odor`, `Conductivity`, `Total dissolved solids`, `Color` |
+| **Contenido Mineral y Químico**| `Iron`, `Nitrate`, `Chloride`, `Lead`, `Zinc`, `Fluoride`, `Copper`, `Sulfate`, `Chlorine`, `Manganese` |
+| **Datos Contextuales** | `Source`, `Water temperature`, `Air temperature`, `Month`, `Day`, `Time of day` |
+
+#### Desafíos Iniciales Identificados en los Datos
+
+Un análisis preliminar revela varios desafíos técnicos que guiarán nuestro proceso de preprocesamiento y modelado:
+
+1.  **Volumen Masivo de Datos:** Con casi 6 millones de filas, la eficiencia del código y el manejo de la memoria son cruciales.
+2.  **Gran Cantidad de Valores Faltantes:** El informe de inspiración señala que aproximadamente 2 millones de filas contienen al menos un valor faltante. Se requerirá una estrategia de imputación o eliminación robusta.
+3.  **Baja Correlación Lineal:** Como se observa en el análisis del proyecto de referencia, las correlaciones directas entre las características y la variable objetivo son bajas. Esto sugiere que las relaciones son no lineales y complejas, justificando el uso de modelos avanzados como las Redes Neuronales en lugar de modelos lineales simples.
+4.  **Dimensionalidad y Ruido:** La alta cantidad de características puede introducir ruido y aumentar la complejidad computacional, haciendo necesaria una selección o ingeniería de características cuidadosa.
