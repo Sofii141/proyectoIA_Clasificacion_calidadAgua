@@ -28,7 +28,6 @@ El éxito del proyecto se definirá por la capacidad del modelo para:
 El proyecto utiliza un conjunto de datos público de Kaggle, originado en el "Intel OneAPI Online AI Hackathon".
 
 - **Dataset en Kaggle:** [Predict the Quality of Freshwater](https://www.kaggle.com/datasets/naiborhujosua/predict-the-quality-of-freshwater)
-- **Repositorio de Inspiración:** [VinayVaishnav/Water_Quality_Prediction](https://github.com/VinayVaishnav/Water-Quality-Prediction)
 
 #### Descripción General del Dataset
 
